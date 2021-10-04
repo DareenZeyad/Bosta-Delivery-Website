@@ -14,6 +14,7 @@ class shipments extends React.PureComponent {
         createDate: '',
         currentState: '',
         timeStamp: '',
+        currReason: '',
         lastUpdate: '',
         promiseDate: '',      
         supportPhoneNumber: '',
@@ -28,31 +29,35 @@ class shipments extends React.PureComponent {
     } 
 
     componentDidMount(){
+        // 6636234, 7234258, 9442984,1094442 
         request(getshipments('9442984')).then((res) => {
             console.log(res)
-            const {CreateDate, CurrentStatus, PromisedDate, 
-                    SupportPhoneNumbers, TrackingNumber, TrackingURL, TransitEvents} = res;                 
-            const {state, timestamp} = CurrentStatus;
+            if(res){
+                const {CreateDate, CurrentStatus, PromisedDate, 
+                        SupportPhoneNumbers, TrackingNumber, TrackingURL, TransitEvents} = res;                 
+                const {state, timestamp, reason} = CurrentStatus;
 
-            // Splitting the timestamp for the 'Last Update'
-            const lastUpdateDay = moment(timestamp).locale('ar_sr').format('dddd');
-            const lastUpdateDate = moment(timestamp).locale('en_us').format('h:mmA, DD/MM/YYYY')
-            const lastUpdateVar = `at ${lastUpdateDate} ${lastUpdateDay}`
+                // Splitting the timestamp for the 'Last Update'
+                const lastUpdateDay = moment(timestamp).locale('ar_sr').format('dddd');
+                const lastUpdateDate = moment(timestamp).locale('en_us').format('h:mmA, DD/MM/YYYY')
+                const lastUpdateVar = `at ${lastUpdateDate} ${lastUpdateDay}`
+                
+                console.log(PromisedDate)
+                const promiseDateVar = moment(PromisedDate).locale('en_us').calendar()
             
-            console.log(PromisedDate)
-            const promiseDateVar = moment(PromisedDate).locale('en_us').calendar()
-        
-            this.setState({
-                createDate: CreateDate,
-                currentState: state,
-                timeStamp: timestamp,
-                lastUpdate: lastUpdateVar,
-                promiseDate: promiseDateVar,
-                supportPhoneNumber: SupportPhoneNumbers,
-                trackingNumber: TrackingNumber,
-                trackingURL: TrackingURL,
-                TransitList: [...TransitEvents]
-            })
+                this.setState({
+                    createDate: CreateDate,
+                    currentState: state,
+                    timeStamp: timestamp,
+                    currReason: reason,
+                    lastUpdate: lastUpdateVar,
+                    promiseDate: promiseDateVar,
+                    supportPhoneNumber: SupportPhoneNumbers,
+                    trackingNumber: TrackingNumber,
+                    trackingURL: TrackingURL,
+                    TransitList: [...TransitEvents]
+                })
+            }
         })
     }
     render(){
@@ -65,6 +70,7 @@ class shipments extends React.PureComponent {
                     lastUpdate = {this.state.lastUpdate}
                     recipient = {this.state.recipient}
                     promiseDate = {this.state.promiseDate}
+                    reason = {this.state.currReason}
                 />
                 <TableSection 
                     TransitList = {this.state.TransitList}

@@ -1,0 +1,48 @@
+.slider .delivered {
+  width: 101%;
+  background-color: var(--delivered);
+  animation: slider-anim 4s;
+}
+
+@keyframes slider-anim {
+  from {
+    width: 68%;
+    background-color: var(--canceled);
+  }
+  to {
+    width: 101%;
+    background-color: var(--delivered);
+  }
+}
+
+.delivered .delivery-icon {
+  background-color: #55cc40;
+  animation: del-anim 4s;
+}
+
+@keyframes del-anim {
+  from {
+    background-color: var(--canceled);
+  }
+  to {
+    background-color: var(--delivered);
+  }
+}
+
+.deliver-tracker .slider .icon {
+  background-color: var(--delivered);
+  animation: icon-anim 4s;
+}
+
+@keyframes icon-anim {
+  from {
+    background-color: var(--canceled);
+  }
+  to {
+    background-color: var(--delivered);
+  }
+}
+
+.deliver-tracker .slider .icon:nth-child(5) {
+  background-color: var(--slider) !important;
+}

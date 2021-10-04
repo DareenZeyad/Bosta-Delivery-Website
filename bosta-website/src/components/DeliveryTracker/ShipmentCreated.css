@@ -1,0 +1,27 @@
+.slider .shipment-created {
+  width: 35%;
+  background-color: var(--canceled);
+  animation: slider-anim 4s;
+}
+
+@keyframes slider-anim {
+  from {
+    width: 4%;
+  }
+  to {
+    width: 35%;
+  }
+}
+
+.shipment-created .delivery-icon {
+  background-color: var(--canceled);
+  animation: del-anim 4s;
+}
+
+.deliver-tracker .slider .icon {
+  background-color: var(--border-color);
+}
+
+.deliver-tracker .slider .icon:nth-child(2) {
+  background-color: var(--canceled) !important;
+}

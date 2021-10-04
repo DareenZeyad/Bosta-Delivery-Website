@@ -1,18 +1,26 @@
 import React from 'react'
 import './Tracker.css'
+// import './ShipmentCreated.css'
+// import './ShipmentReceived.css'
+import './ShipmentDelivered.css'
 import { SliderContent } from './SliderContent'
 import {GoCheck} from 'react-icons/go'
 import {FaShippingFast} from 'react-icons/fa'
 
-function Tracker({trackingNumber, currentState, lastUpdate, recipient, promiseDate}) {
+function Tracker({trackingNumber, currentState, lastUpdate, recipient, promiseDate, reason}) {
     let currStateClassName = ''
     let val = ''
-    if(currentState === "DELIVERED" || currentState === "DELIVERED_TO_SENDER") {
-        currentState = 'تم تسليم الشحنة'
-        currStateClassName = 'delivered'
-        val = '100%'
+    const allStates = ['تم إنشاء الشحنة', 'تم إستلام الشحنة من التاجر', 'الشحنة خرجت للتسليم', 'تم تسليم الشحنة']
+    const allClassNames = ['shipment-created', 'shipment-received', 'shipment-canceled', 'delivered']
+    
+    const checkNames = ["SHIPMENT_CREATED", "RECEIVED_SHIPMENT", "SHIMPENT_OUT_OF_DELIVERY", "DELIVERED", "DELIVERED_TO_SENDER"];
+    for (let i = 0; i < checkNames.length; ++i){
+        if(currentState === checkNames[i]){
+            currentState = allStates[Math.min(i, 3)];
+            currStateClassName = allClassNames[Math.min(i, 3)];
+            val = Math.min(((i + 1) * 25), 100).toString() + '%';
+        }
     }
-    // else if(currentState === "DELIVERED_TO_SENDER") currentState = 'لم يتم تسليم الشحنة'
 
     return (
         <div className="hero">
@@ -20,7 +28,9 @@ function Tracker({trackingNumber, currentState, lastUpdate, recipient, promiseDa
                 <div className="content">
                     <div className="single-content">
                         <p>{`${trackingNumber} رقم الشحنة`}</p>
-                        <h3 className={currStateClassName}>{currentState}</h3>
+                        <h3 className={`${reason ? `reason ${currStateClassName}` : currStateClassName} `}>
+                            {currentState}
+                        </h3>
                     </div>
 
                     <div className="single-content">
@@ -41,7 +51,7 @@ function Tracker({trackingNumber, currentState, lastUpdate, recipient, promiseDa
 
                 <div className="deliver-tracker">
                     <div className="slider">
-                        <div className="slider-fill">
+                        <div className={`slider-fill ${currStateClassName}`}>
                             <FaShippingFast className="delivery-icon"/>
                         </div>
                         <div className="icon">
@@ -57,14 +67,24 @@ function Tracker({trackingNumber, currentState, lastUpdate, recipient, promiseDa
                             <GoCheck className="check-icon"/>
                         </div>
                     </div>
+
                     <div className="slider-content-container">
-                        {SliderContent.map((items, index) => {
-                            return(
-                                <div className="slider-conent" key={index}>
-                                    <p>{items.title}</p>
-                                </div>
-                            )
-                        })}
+                        <div className="slider-content">
+                            <p>تم إنشاء الشحنة</p>
+                            <p className="reason">{reason}</p>
+                        </div>
+                        <div className="slider-content">
+                            <p>تم  إستلام الشحنة من التاجر</p>
+                            <p className="reason">{reason}</p>
+                        </div>
+                        <div className="slider-content">
+                            <p>الشحنة خرجت للتسليم</p>
+                            <p className="reason">{reason}</p>
+                        </div>
+                        <div className="slider-content">
+                            <p>تم التسليم</p>
+                            <p className="reason">{reason}</p>
+                        </div>
                     </div>
 
                     <div className="mobile-bar">

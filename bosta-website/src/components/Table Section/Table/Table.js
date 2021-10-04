@@ -36,13 +36,17 @@ function Table({TransitList}) {
                         TransitList.map((item, index) => {
                             var date = moment(item.timestamp).locale("en_us").calendar()
                             var time = moment(item.timestamp).locale("en_us").format("hh:mm A")
-
                             return(
                                 <tr key={index}>
                                     <td>{commonHub}</td>
                                     <td>{date}</td>
                                     <td>{time}</td>
-                                    <td>{item.state}</td>
+                                    <td className={`${item.reason ? 'reason state' : 'no-reason state'}`}>
+                                        {item.state}
+                                        <p>
+                                            {item.reason}
+                                        </p>
+                                    </td>
                                 </tr>
                             )
                         })
