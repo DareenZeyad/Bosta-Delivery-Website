@@ -1,0 +1,131 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 50px;
+}
+
+.inner-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  text-align: right;
+  width: 86%;
+}
+
+.table-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+}
+
+/* Address & Question Section */
+.address-container {
+  width: 35%;
+}
+
+.address-container p {
+  margin-bottom: 10px;
+}
+
+.address-container .address {
+  background-color: var(--border-color);
+  width: 100%;
+  height: 13vh;
+  padding: 2% 2%;
+  border-radius: 0.5em;
+  color: rgb(58, 58, 58);
+
+  display: flex;
+  text-align: right;
+  align-items: center;
+  justify-content: center;
+}
+
+.question-section {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 0.5em;
+
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+}
+
+.question-section .img-container {
+  display: flex;
+  align-items: center;
+  color: #f62b17;
+}
+
+.question-section .question-content p {
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(58, 58, 58);
+}
+
+.question-section .question-content .button {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 2px 5px;
+  background-color: #f62b17;
+  color: #fff;
+  border-radius: 0.5em;
+  font-size: 14px;
+
+  transition: transform linear ease;
+  transition: 0.2s;
+}
+
+.question-section .question-content .button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+@media only screen and (max-width: 1290px) {
+  .inner-container {
+    display: block;
+  }
+  .table-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .address-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
+  }
+
+  .address-container .question-section {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .address-container .question-content {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
+  }
+}
+
+@media only screen and (max-width: 1290px) and (min-width: 685px) {
+  .address-container .address {
+    width: 60%;
+  }
+  .question-content .button {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 685px) {
+  .address {
+    width: 100%;
+  }
+  .question-content .button {
+    width: 80%;
+  }
+}
