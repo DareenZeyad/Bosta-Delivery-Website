@@ -1,6 +1,5 @@
 import React from 'react'
 import './Table.css'
-import { TableData } from './TableData'
 import moment from 'moment'
 import arLocal from "moment/locale/ar"
 

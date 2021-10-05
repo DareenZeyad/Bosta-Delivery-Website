@@ -3,7 +3,6 @@ import './Tracker.css'
 // import './ShipmentCreated.css'
 // import './ShipmentReceived.css'
 import './ShipmentDelivered.css'
-import { SliderContent } from './SliderContent'
 import {GoCheck} from 'react-icons/go'
 import {FaShippingFast} from 'react-icons/fa'
 

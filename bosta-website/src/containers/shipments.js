@@ -41,8 +41,7 @@ class shipments extends React.PureComponent {
                 const lastUpdateDay = moment(timestamp).locale('ar_sr').format('dddd');
                 const lastUpdateDate = moment(timestamp).locale('en_us').format('h:mmA, DD/MM/YYYY')
                 const lastUpdateVar = `at ${lastUpdateDate} ${lastUpdateDay}`
-                
-                console.log(PromisedDate)
+            
                 const promiseDateVar = moment(PromisedDate).locale('en_us').format('DD/MM/YYYY')
             
                 this.setState({
